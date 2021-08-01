@@ -1,0 +1,7 @@
+ja:
+  enums: 
+    invitation: # モデル名
+      status: # カラム名
+        inviting: '招待中' # enumの値
+        prticipated: '参加済み' # enumの値
+        

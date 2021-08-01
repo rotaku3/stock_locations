@@ -5,7 +5,6 @@
         <h3 class="card-title"><%= @user.name %></h3>
       </div>
     </div>
-    
   </aside>
   <div>
     <ul class="nav nav-tabs nav-justified mb-3">
@@ -14,6 +13,6 @@
       <li class="nav-item"><a href="<%= inviting_user_path(current_user) %>" class="nav-link <%= 'active' if current_page?(inviting_user_path(current_user)) %>">招待されているグループ一覧 <span class="badge bg-secondary"></a></li>
     </ul>
    </div>
-   <%= render 'places/places', places: @places %>
+   <%= render 'groups', groups: @inviting %>
   
 </div> 

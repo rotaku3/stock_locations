@@ -47,3 +47,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pagy'
 
 gem 'devise'
+
+gem 'geocoder'
+
+gem 'pry-byebug', group: :development
+
+gem 'dotenv-rails'
+
+gem 'rails-i18n'
+gem 'enum_help'
+
+gem 'http'

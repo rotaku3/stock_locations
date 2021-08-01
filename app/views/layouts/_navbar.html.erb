@@ -11,6 +11,10 @@
         <div class="btn-group">
           <ul class="navbar-nav">
             <li class="ms-3"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+            <li class="ms-3"><%= link_to '新規投稿', new_place_path, class: 'nav-link' %></li>
+            <li class="ms-3"><%= link_to '新規グループ', new_group_path, class: 'nav-link' %></li>
+            <li class="ms-3"><%= link_to '招待されているグループ', inviting_user_path(current_user), class: 'nav-link' %></li>
+            <li class="ms-3"><%= link_to '参加中のグループ', participated_user_path(current_user), class: 'nav-link' %></li>
           </ul>
           <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><%= current_user.name %></button>
           <ul class="dropdown-menu dropdown-menu-end">
