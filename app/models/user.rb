@@ -7,32 +7,26 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :places
-    has_many :groups,dependent: :destroy
+    
+    has_many :relationships
+    has_many :followings, through: :relationships, source: :follow
+    has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
+    has_many :followers, through: :reverses_of_relationship, source: :user
 
-    
-    has_many :invitations,dependent: :destroy
-    has_many :invitation_groups, through: :invitations, source: :group
-    
-    def participated_groups
-      invitations = self.invitations.where(status: 'participated')
-      ids = invitations.pluck(:group_id)
-      Group.where(id: ids)
+  def follow(other_user)
+    unless self == other_user
+      self.relationships.find_or_create_by(follow_id: other_user.id)
     end
+  end
+
+  def unfollow(other_user)
+    relationship = self.relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
     
-    def inviting_groups
-      invitations = self.invitations.where(status: 'inviting')
-      ids = invitations.pluck(:group_id)
-      Group.where(id: ids)
-    end
-    
-    def invitation(other_user)
-     unless self == other_user && other_user.id == invitations.user_id
-      self.invitations.find_or_create_by(user_id: other_user.id)
-     end
-    end
-    
-    def invitation?(other_user)
-     self.invitations.include?(other_user)
-    end
     
 end

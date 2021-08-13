@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
   
   def index
     @pagy, @users = pagy(User.order(id: :desc), items: 10)
@@ -26,16 +26,16 @@ class UsersController < ApplicationController
     end
   end
   
-  def participated
+  def followings
     @user = User.find(params[:id])
-    @pagy, @participated = pagy(@user.participated_groups)
-    
+    @pagy, @followings = pagy(@user.followings)
+    counts(@user)
   end
-  
-  def inviting
+
+  def followers
     @user = User.find(params[:id])
-    @pagy, @inviting = pagy(@user.inviting_groups)
-    
+    @pagy, @followers = pagy(@user.followers)
+    counts(@user)
   end
   
   def search

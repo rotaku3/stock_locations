@@ -10,27 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_121210) do
-
-  create_table "groups", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "user_id"
-    t.boolean "public", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_groups_on_user_id"
-  end
-
-  create_table "invitations", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "group_id", null: false
-    t.bigint "user_id", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id", "user_id"], name: "index_invitations_on_group_id_and_user_id", unique: true
-    t.index ["group_id"], name: "index_invitations_on_group_id"
-    t.index ["user_id"], name: "index_invitations_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 2021_08_13_021720) do
 
   create_table "places", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
@@ -45,6 +25,16 @@ ActiveRecord::Schema.define(version: 2021_07_23_121210) do
     t.index ["user_id"], name: "index_places_on_user_id"
   end
 
+  create_table "relationships", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "follow_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -52,8 +42,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_121210) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "groups", "users"
-  add_foreign_key "invitations", "groups"
-  add_foreign_key "invitations", "users"
   add_foreign_key "places", "users"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "follow_id"
 end

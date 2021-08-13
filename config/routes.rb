@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show, :create] do
      member do 
-       get :inviting
-       get :participated
+       get :followings
+       get :followers
      end
      collection do
       get :search
@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   
   resources :places, only: [:new, :create, :edit, :update, :destroy]
   
-  resources :groups, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end

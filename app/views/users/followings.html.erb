@@ -14,6 +14,5 @@
       <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワー  <span class="badge bg-secondary"><%= @count_followers %></span></a></li>
     </ul>
    </div>
-   <%= render 'places/places', places: @places %>
-  
+   <%= render 'users', users: @followings %>
 </div> 
