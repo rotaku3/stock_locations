@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :place_correct_user, only: [:destroy]
 
   def new
     @place = Place.new
@@ -43,8 +43,13 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :address, :datetime, :content)
+    params.require(:place).permit(:name, :address, :datetime, :latitude, :longitude, :content)
   end
   
-  
+  def place_correct_user
+    @place = current_user.places.find_by(id: params[:id])
+    unless @place
+      redirect_to root_url
+    end
+  end
 end

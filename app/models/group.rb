@@ -19,7 +19,5 @@ class Group < ApplicationRecord
     
     validates :name, presence: true
     
-    #after_save do |group|
-       # group.user.invitations.create!(group_id: group.id, status: 'participated')
-    #end
+    
 end
