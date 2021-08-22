@@ -1,7 +1,27 @@
 ja:
-  enums: 
-    invitation: # モデル名
-      status: # カラム名
-        inviting: '招待中' # enumの値
-        prticipated: '参加済み' # enumの値
-        
+   errors:
+    messages:
+      carrierwave_processing_error: 処理できませんでした
+      carrierwave_integrity_error: は許可されていないファイルタイプです
+      carrierwave_download_error: はダウンロードできません
+      extension_whitelist_error: "%{extension}ファイルのアップロードは許可されていません。アップロードできるファイルタイプ: %{allowed_types}"
+      extension_blacklist_error: "%{extension}ファイルのアップロードは許可されていません。アップロードできないファイルタイプ: %{prohibited_types}"
+      content_type_whitelist_error: "%{content_type}ファイルのアップロードは許可されていません。アップロードできるファイルタイプ: %{allowed_types}"
+      content_type_blacklist_error: "%{content_type}ファイルのアップロードは許可されていません"
+      rmagick_processing_error: "rmagickがファイルを処理できませんでした。画像を確認してください。エラーメッセージ: %{e}"
+      mini_magick_processing_error: "MiniMagickがファイルを処理できませんでした。画像を確認してください。エラーメッセージ: %{e}"
+      min_size_error: "を%{min_size}以上のサイズにしてください"
+      max_size_error: "を%{max_size}以下のサイズにしてください"
+      
+   activerecord:
+    
+    attributes:
+      user:
+        name: 名前
+        password: パスワード
+      place:
+        name: 撮影地
+        image: 画像
+        address: 住所
+        datetime: 撮影日時
+        content: コメント

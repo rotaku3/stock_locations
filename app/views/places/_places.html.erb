@@ -1,61 +1,48 @@
 <% if places.any? %>
   <ul class="list-unstyled mt-2">
     <% places.each do |place| %>
-      <li class="d-flex">
-        <div>
-          <div>
-            <p><%= place.name %></p>
-          </div>
-          <div>
-            <%= link_to place.user.name, user_path(place.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= place.created_at %></span>
-          </div>
-          <div>
-            
-            <script>
-               function initMap() {
-                 var uluru = {lat: <%= place.latitude %>, lng: <%= place.longitude %>};
-                 var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 16,
-                    enter: uluru
-                    });
-                 var transitLayer = new google.maps.TransitLayer();
-                 transitLayer.setMap(map);
-          
-                 var contentString = '住所：<%= place.address %>';
-                 var infowindow = new google.maps.InfoWindow({
-                        content: contentString
-                     });
-                 var marker = new google.maps.Marker({
-                      position: uluru,
-                      map: map
-                          });
-                             }
-            </script>
-            <div id="map"></div>
-          </div>
-          <div>
-            <p><%= place.datetime %></p>
-          </div>
-          <div>
-            <p><%= place.content %></p>
-          </div>
-          <div>
-            <% if current_user == place.user %>
-              <%= link_to "編集", edit_place_path(place),  class: 'btn btn-primary btn-sm' %>
-              <%= link_to "削除", place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
-            <% end %>
+      <li class="mb-5">
+        <div class="row">
+          <aside class="col-sm-4">
+            <div class="card">
+              <div class="card-header">
+                <p><%= place.name %></p>
+              </div>
+              <div class="card-body">
+                <%= image_tag place.image_url, class: 'card-img-top', size: '200x300' %>
+              </div>
+            </div>
+          </aside>
+          <div class="col-sm-8">
+            <div>
+              <%= link_to place.user.name, user_path(place.user), class: "text-decoration-none" %> <span class="text-muted">posted at <%= place.created_at %></span>
+            </div>
+            <div>
+              <%= link_to "撮影地の地図", "https://www.google.com/maps/search/?api=1&query=#{place.latitude},#{place.longitude}" %>
+            </div>
+            <div>
+              <p>撮影日時　　<%= place.datetime %></p>
+            </div>
+            <div>
+              <p><%= place.content %></p>
+            </div>
+            <div>
+              <ul>
+              <% if current_user == place.user %>
+                <li class="d-inline-block"><%= link_to "編集", edit_place_path(place),  class: 'btn btn-primary btn-sm' %></li>
+                <li class="d-inline-block"><%= link_to "削除", place, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %></li>
+              <% end %>
+                <li class="d-inline-block">
+                  <%= render 'favorites/favorite_button', place: place %>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </li>
     <% end %>
   </ul>
   <%== pagy_bootstrap_nav(@pagy) %>
-  <style>
-     #map {
-           height: 300px;
-           width: 100%;
-           }
-  </style>
   
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap"async defer></script>
+  
 <% end %>

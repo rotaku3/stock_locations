@@ -1,0 +1,30 @@
+<div id="map"></div>
+            <script>
+               function initMap() {
+                 var uluru = {lat: <%= place.latitude %>, lng: <%= place.longitude %>};
+                 var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 16,
+                    enter: uluru
+                    });
+                 var transitLayer = new google.maps.TransitLayer();
+                 transitLayer.setMap(map);
+          
+                 var contentString = '住所：<%= place.address %>';
+                 var infowindow = new google.maps.InfoWindow({
+                        content: contentString
+                     });
+                 var marker = new google.maps.Marker({
+                      position: uluru,
+                      map: map
+                          });
+                             }
+            </script>
+            
+
+
+<style>
+     #map {
+           height: 200px;
+           width: 100%;
+           }
+  </style>

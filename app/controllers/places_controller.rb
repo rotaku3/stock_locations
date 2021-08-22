@@ -1,6 +1,7 @@
 class PlacesController < ApplicationController
   before_action :require_user_logged_in
   before_action :place_correct_user, only: [:destroy]
+  before_action :set_locale
 
   def new
     @place = Place.new
@@ -43,7 +44,7 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :address, :datetime, :latitude, :longitude, :content)
+    params.require(:place).permit(:name, :address, :datetime, :image, :image_cache, :remove_image ,:latitude, :longitude, :content)
   end
   
   def place_correct_user
@@ -51,5 +52,9 @@ class PlacesController < ApplicationController
     unless @place
       redirect_to root_url
     end
+  end
+  
+  def set_locale
+    I18n.locale = :ja
   end
 end

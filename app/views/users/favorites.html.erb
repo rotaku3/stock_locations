@@ -15,6 +15,6 @@
       <li class="nav-item"><a href="<%= favorites_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favorites_user_path(@user)) %>">お気に入りした投稿  <span class="badge bg-secondary"><%= @count_favorites %></span></a></li>
     </ul>
    </div>
-   <%= render 'users', users: @followers %>
+   <%= render 'places/places', places: @favorites %>
   
 </div> 

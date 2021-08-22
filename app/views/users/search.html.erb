@@ -1,0 +1,6 @@
+<h1>ユーザー検索</h1>
+<%= form_tag search_users_path, method: :get do %>
+  <%= text_field_tag :search_keyword %>
+  <%= submit_tag "Search", username: :nil, class: "button is-info" %>
+<% end %>
+<%= render 'users/users', users: @users %>

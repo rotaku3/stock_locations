@@ -8,6 +8,18 @@
         <%= f.label :name, '撮影地' %>
         <%= f.text_field :name, class: 'form-control' %>
       </div>
+      
+      <div class="mb-3">
+        <%= f.label :image,'画像' %>
+        <%= f.file_field :image, class: 'form-control', accept: 'image/*' %>
+        <%= f.hidden_field :image_cache %>
+        <% if current_page?("/places/#{place.id}/edit") %>
+        <label>
+          <%= f.check_box :remove_image %>
+          画像を削除する
+        </label>
+        <% end %>
+      </div>
 
       <div class="mb-3">
         <%= f.label :address, '住所' %>
