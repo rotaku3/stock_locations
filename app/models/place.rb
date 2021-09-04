@@ -9,7 +9,6 @@ class Place < ApplicationRecord
     
     
     validates :name,presence: true
-    validates :user,presence: true
     validates :address,presence: true
     
     

@@ -17,8 +17,9 @@ ja:
     
     attributes:
       user:
-        name: 名前
+        name: ユーザー名
         password: パスワード
+        password_confirmation: パスワード（確認用）
       place:
         name: 撮影地
         image: 画像
