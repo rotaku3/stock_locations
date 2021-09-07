@@ -1,7 +1,7 @@
 <% if current_user.favorite?(place) %>
       <%= form_with(model: current_user.favorites.find_by(place_id: place.id), method: :delete) do |f| %>
       <%= hidden_field_tag :place_id, place.id%>
-      <%= f.submit 'お気に入り解除', class: 'btn btn-danger btn-sm' %>
+      <%= f.submit 'お気に入りを削除', class: 'btn btn-danger btn-sm' %>
     <% end %>
   <% else %>
     <%= form_with(model: current_user.favorites.build) do |f| %>
