@@ -50,6 +50,7 @@ test:
 #
 production:
   <<: *default
-  database: shooting_location_production
-  username: shooting_location
-  password: <%= ENV['SHOOTING_LOCATION_DATABASE_PASSWORD'] %>
+  database: stock_locations
+  username: root
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>
